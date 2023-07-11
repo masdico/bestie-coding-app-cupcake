@@ -45,7 +45,7 @@ class OrderViewModel : ViewModel() {
         return _flavor.value.isNullOrEmpty()
     }
 
-    fun getPickupOptions(): List<String> {
+    private fun getPickupOptions(): List<String> {
         val options = mutableListOf<String>()
         val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
         val calendar = Calendar.getInstance()
@@ -56,7 +56,7 @@ class OrderViewModel : ViewModel() {
         return options
     }
 
-    fun resetOrder() {
+    private fun resetOrder() {
         _quantity.value = 0
         _flavor.value = ""
         _date.value = dateOptions[0]
