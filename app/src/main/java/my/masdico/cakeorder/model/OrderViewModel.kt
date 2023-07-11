@@ -1,8 +1,7 @@
 package my.masdico.cakeorder.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.Calendar
@@ -23,7 +22,10 @@ class OrderViewModel : ViewModel() {
     val date: LiveData<String> get() = _date
 
     private val _price = MutableLiveData<Double>()
-    val price: LiveData<Double> get() = _price
+    val price: LiveData<String> get() = _price.map {
+        // Transformations.map deprecated in livedata-ktx:2.6.0. Use _price.map instead.
+        NumberFormat.getCurrencyInstance().format(it)
+    }
 
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
